@@ -107,7 +107,11 @@ public class TelaPrincipalMDI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        // TODO add your handling code here:
+
+         RelatorioGeral relatoriogeral = new RelatorioGeral();
+         jDesktopPane1.add(relatoriogeral);
+         relatoriogeral.setVisible(true);
+      
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -127,7 +131,12 @@ public class TelaPrincipalMDI extends javax.swing.JFrame {
     }//GEN-LAST:event_MenuGerenciarActionPerformed
 
     private void MenuAddFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuAddFuncionarioActionPerformed
-        // TODO add your handling code here:
+            
+         GerenciarFuncionarios gerenciarfuncionarios = new GerenciarFuncionarios();
+         jDesktopPane1.add(gerenciarfuncionarios);
+         gerenciarfuncionarios.setVisible(true);
+
+
     }//GEN-LAST:event_MenuAddFuncionarioActionPerformed
 
     /**

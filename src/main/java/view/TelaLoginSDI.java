@@ -10,6 +10,7 @@ package view;
  */
 public class TelaLoginSDI extends javax.swing.JFrame {
 
+
     /**
      * Creates new form TelaLoginMDI
      */
@@ -106,8 +107,8 @@ public class TelaLoginSDI extends javax.swing.JFrame {
 
     private void BotaoLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoLoginActionPerformed
         
-        
-        
+         
+            
         
     }//GEN-LAST:event_BotaoLoginActionPerformed
 
