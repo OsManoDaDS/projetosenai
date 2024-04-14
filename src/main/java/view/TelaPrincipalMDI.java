@@ -4,6 +4,13 @@
  */
 package view;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.text.Utilities;
+
 /**
  *
  * @author 232.933573
@@ -115,7 +122,9 @@ public class TelaPrincipalMDI extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        
 
+       
         GerenciarProdutos telagerenciar = new GerenciarProdutos();
          jDesktopPane1.add(telagerenciar);
          telagerenciar.setVisible(true);

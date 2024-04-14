@@ -68,7 +68,7 @@ public class TelaLoginSDI extends javax.swing.JFrame {
             }
         });
         jPanel2.add(BotaoLogin);
-        BotaoLogin.setBounds(360, 340, 72, 27);
+        BotaoLogin.setBounds(360, 340, 100, 27);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Grey and Black Simple Icon Business Logo (2).png"))); // NOI18N
         jPanel2.add(jLabel2);
@@ -123,7 +123,7 @@ public class TelaLoginSDI extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Mac OS X".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }

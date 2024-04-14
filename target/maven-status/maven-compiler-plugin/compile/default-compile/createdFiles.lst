@@ -2,6 +2,7 @@ view\GerenciarFuncionariosGerente.class
 view\TelaLoginSDI$1.class
 view\TelaPrincipalMDIRepositor.class
 view\TelaLoginSDI.class
+view\GerenciarProdutos$5.class
 view\TelaCadastroSDI1$1.class
 view\GerenciarProdutos$1.class
 view\TelaInicialSDI$3.class
@@ -14,6 +15,7 @@ view\telalogin.class
 view\TelaPrincipal.class
 view\GerenciarFuncionarios$2.class
 view\GerenciarProdutos$2.class
+view\GerenciarProdutos$6.class
 view\TelaInicialSDI.class
 view\TelaPrincipalMDIFinanceiro$1.class
 view\TelaPrincipalMDI.class
@@ -27,11 +29,13 @@ view\TelaPrincipalMDI$5.class
 view\GerenciarFuncionarios$1.class
 view\TelaLoginSDI$3.class
 view\telalogin$1.class
+view\TelaCadastroSDI1$3.class
 view\GerenciarFuncionariosGerente$2.class
 view\TelaPrincipal$3.class
 view\TelaCadastroSDI1.class
 view\GerenciarProdutos$3.class
 view\TelaInicialSDI$1.class
+view\GerenciarProdutos$4.class
 view\TelaLoginSDI$2.class
 view\TelaPrincipalMDIFinanceiro.class
 view\TelaPrincipal$2.class
@@ -43,5 +47,7 @@ view\TelaInicialSDI$2.class
 view\GerenciarFuncionarios.class
 view\RelatorioGeral$1.class
 view\TelaInicial.class
+view\GerenciarProdutos$7.class
 view\GerenciarFuncionariosGerente$1.class
+view\TelaCadastroSDI1$2.class
 view\TelaPrincipalMDI$4.class

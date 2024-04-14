@@ -4,6 +4,17 @@
  */
 package view;
 
+import com.formdev.flatlaf.FlatDarculaLaf;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+
 /**
  *
  * @author 232.933573
@@ -15,6 +26,24 @@ public class GerenciarProdutos extends javax.swing.JInternalFrame {
      */
     public GerenciarProdutos() {
         initComponents();
+        
+        
+        DefaultTableModel modelo = (DefaultTableModel) jTProdutos.getModel();
+        jTProdutos.setRowSorter(new TableRowSorter(modelo));
+        
+        SwingUtilities.invokeLater(() -> {
+        
+            try {
+                UIManager.setLookAndFeel(new FlatDarculaLaf());
+                SwingUtilities.updateComponentTreeUI(this);
+            } catch (UnsupportedLookAndFeelException ex) {
+                Logger.getLogger(GerenciarProdutos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+        });
+        
+      
+   
     }
 
     /**
@@ -33,7 +62,7 @@ public class GerenciarProdutos extends javax.swing.JInternalFrame {
         txtPreco = new javax.swing.JTextField();
         txtQuantidade = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        Tabela1 = new javax.swing.JTable();
+        jTProdutos = new javax.swing.JTable();
         BotaoAdicionarProduto = new javax.swing.JButton();
         BotaoRemoverProduto = new javax.swing.JButton();
         BotaoAlterarProduto = new javax.swing.JButton();
@@ -59,38 +88,40 @@ public class GerenciarProdutos extends javax.swing.JInternalFrame {
             }
         });
 
-        Tabela1.setModel(new javax.swing.table.DefaultTableModel(
+        jTProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "ID", "Nome", "Preço", "Quantidade"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Object.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
-        jScrollPane1.setViewportView(Tabela1);
+        jTProdutos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTProdutosMouseClicked(evt);
+            }
+        });
+        jTProdutos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTProdutosKeyReleased(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTProdutos);
 
         BotaoAdicionarProduto.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         BotaoAdicionarProduto.setText("Adicionar Produto");
@@ -102,9 +133,19 @@ public class GerenciarProdutos extends javax.swing.JInternalFrame {
 
         BotaoRemoverProduto.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         BotaoRemoverProduto.setText("Remover Produto");
+        BotaoRemoverProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotaoRemoverProdutoActionPerformed(evt);
+            }
+        });
 
         BotaoAlterarProduto.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         BotaoAlterarProduto.setText("Alterar Produto");
+        BotaoAlterarProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotaoAlterarProdutoActionPerformed(evt);
+            }
+        });
 
         BotaoSalvarTabela.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         BotaoSalvarTabela.setText("Salvar");
@@ -131,9 +172,8 @@ public class GerenciarProdutos extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(BotaoAlterarProduto, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(BotaoAdicionarProduto, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
-                                .addComponent(BotaoRemoverProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(BotaoAdicionarProduto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                            .addComponent(BotaoRemoverProduto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(40, 40, 40))))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
@@ -186,8 +226,62 @@ public class GerenciarProdutos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtPrecoActionPerformed
 
     private void BotaoAdicionarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoAdicionarProdutoActionPerformed
-        // TODO add your handling code here:
+
+        DefaultTableModel dtmProdutos = (DefaultTableModel) jTProdutos.getModel();
+        Object[] dados = {0+1,txtNomedoProduto.getText(),txtPreco.getText(),txtQuantidade.getText()};
+        dtmProdutos.addRow(dados);
+
+
     }//GEN-LAST:event_BotaoAdicionarProdutoActionPerformed
+
+    private void BotaoRemoverProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoRemoverProdutoActionPerformed
+
+           if(jTProdutos.getSelectedRow() != -1){
+
+            DefaultTableModel dtmProdutos = (DefaultTableModel) jTProdutos.getModel();
+            dtmProdutos.removeRow(jTProdutos.getSelectedRow());
+           }else{
+               JOptionPane.showMessageDialog(null, "Selecione um produto para remover");
+           }
+
+
+    }//GEN-LAST:event_BotaoRemoverProdutoActionPerformed
+
+    private void jTProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTProdutosMouseClicked
+
+    if(jTProdutos.getSelectedRow() != -1){
+               txtNomedoProduto.setText(jTProdutos.getValueAt(jTProdutos.getSelectedRow(), 1).toString());
+               txtPreco.setText(jTProdutos.getValueAt(jTProdutos.getSelectedRow(), 2).toString());
+               txtQuantidade.setText(jTProdutos.getValueAt(jTProdutos.getSelectedRow(), 3).toString());
+           }
+
+
+
+    }//GEN-LAST:event_jTProdutosMouseClicked
+
+    private void jTProdutosKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTProdutosKeyReleased
+
+
+       if(jTProdutos.getSelectedRow() != -1){
+           txtNomedoProduto.setText(jTProdutos.getValueAt(jTProdutos.getSelectedRow(), 1).toString());
+           txtPreco.setText(jTProdutos.getValueAt(jTProdutos.getSelectedRow(), 2).toString());
+           txtQuantidade.setText(jTProdutos.getValueAt(jTProdutos.getSelectedRow(), 3).toString());
+       }
+
+
+    }//GEN-LAST:event_jTProdutosKeyReleased
+
+    private void BotaoAlterarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoAlterarProdutoActionPerformed
+
+        if(jTProdutos.getSelectedRow() != -1){
+           
+            jTProdutos.setValueAt(txtNomedoProduto.getText(), jTProdutos.getSelectedRow(), 1);
+            jTProdutos.setValueAt(txtPreco.getText(), jTProdutos.getSelectedRow(), 2);
+            jTProdutos.setValueAt(txtQuantidade.getText(), jTProdutos.getSelectedRow(), 3);
+       }
+
+         
+    }//GEN-LAST:event_BotaoAlterarProdutoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -195,11 +289,11 @@ public class GerenciarProdutos extends javax.swing.JInternalFrame {
     private javax.swing.JButton BotaoAlterarProduto;
     private javax.swing.JButton BotaoRemoverProduto;
     private javax.swing.JButton BotaoSalvarTabela;
-    private javax.swing.JTable Tabela1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTProdutos;
     private javax.swing.JTextField txtNomedoProduto;
     private javax.swing.JTextField txtPreco;
     private javax.swing.JTextField txtQuantidade;
