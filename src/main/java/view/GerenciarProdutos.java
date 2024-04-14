@@ -227,22 +227,14 @@ public class GerenciarProdutos extends javax.swing.JInternalFrame {
 
     private void BotaoAdicionarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoAdicionarProdutoActionPerformed
 
-        DefaultTableModel dtmProdutos = (DefaultTableModel) jTProdutos.getModel();
-        Object[] dados = {0+1,txtNomedoProduto.getText(),txtPreco.getText(),txtQuantidade.getText()};
-        dtmProdutos.addRow(dados);
+        
 
 
     }//GEN-LAST:event_BotaoAdicionarProdutoActionPerformed
 
     private void BotaoRemoverProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoRemoverProdutoActionPerformed
 
-           if(jTProdutos.getSelectedRow() != -1){
-
-            DefaultTableModel dtmProdutos = (DefaultTableModel) jTProdutos.getModel();
-            dtmProdutos.removeRow(jTProdutos.getSelectedRow());
-           }else{
-               JOptionPane.showMessageDialog(null, "Selecione um produto para remover");
-           }
+           
 
 
     }//GEN-LAST:event_BotaoRemoverProdutoActionPerformed
@@ -273,13 +265,7 @@ public class GerenciarProdutos extends javax.swing.JInternalFrame {
 
     private void BotaoAlterarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoAlterarProdutoActionPerformed
 
-        if(jTProdutos.getSelectedRow() != -1){
-           
-            jTProdutos.setValueAt(txtNomedoProduto.getText(), jTProdutos.getSelectedRow(), 1);
-            jTProdutos.setValueAt(txtPreco.getText(), jTProdutos.getSelectedRow(), 2);
-            jTProdutos.setValueAt(txtQuantidade.getText(), jTProdutos.getSelectedRow(), 3);
-       }
-
+      
          
     }//GEN-LAST:event_BotaoAlterarProdutoActionPerformed
 

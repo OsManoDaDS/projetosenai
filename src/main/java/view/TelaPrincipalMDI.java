@@ -4,6 +4,7 @@
  */
 package view;
 
+import com.formdev.flatlaf.FlatDarculaLaf;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.SwingUtilities;
@@ -22,6 +23,17 @@ public class TelaPrincipalMDI extends javax.swing.JFrame {
      */
     public TelaPrincipalMDI() {
         initComponents();
+        
+        SwingUtilities.invokeLater(() -> {
+        
+            try {
+                UIManager.setLookAndFeel(new FlatDarculaLaf());
+                SwingUtilities.updateComponentTreeUI(this);
+            } catch (UnsupportedLookAndFeelException ex) {
+                Logger.getLogger(GerenciarProdutos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+        });
     }
 
     /**
