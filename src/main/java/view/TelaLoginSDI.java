@@ -5,8 +5,10 @@
 package view;
 
 import com.formdev.flatlaf.FlatDarculaLaf;
+import java.awt.event.KeyEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -75,6 +77,11 @@ public class TelaLoginSDI extends javax.swing.JFrame {
                 txtSenhaActionPerformed(evt);
             }
         });
+        txtSenha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtSenhaKeyPressed(evt);
+            }
+        });
         jPanel2.add(txtSenha);
         txtSenha.setBounds(40, 290, 280, 30);
 
@@ -118,17 +125,45 @@ public class TelaLoginSDI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void txtSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSenhaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSenhaActionPerformed
 
+    public boolean checklogin(String login, String senha){
+        return login.equals("usuario") && senha.equals("123");
+    }
+    
     private void BotaoLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoLoginActionPerformed
+    
+        try {
+                
+            if (txtUsuario == null || txtSenha == null) {
+            throw new NullPointerException("txtUsuario ou txtSenha vazios");
+            }
+
+            if (this.checklogin(txtUsuario.getText(), new String (txtSenha.getPassword()))) {
+            JOptionPane.showMessageDialog(null, "SEJA BEM VINDO!");
+            new TelaPrincipalMDI().setVisible(true);
+            this.dispose();
+            }
+            else {
+            JOptionPane.showMessageDialog(null, "Usuário ou senha incorretos!");
+            }
+        }
         
+        catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "Usuário ou senha vazio" + e.getMessage());
+        }
          
-            
-        
     }//GEN-LAST:event_BotaoLoginActionPerformed
+
+    private void txtSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSenhaKeyPressed
+        
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER);{
+        }
+        
+    }//GEN-LAST:event_txtSenhaKeyPressed
 
     /**
      * @param args the command line arguments
