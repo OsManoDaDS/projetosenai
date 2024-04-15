@@ -8,6 +8,7 @@ import com.formdev.flatlaf.FlatDarculaLaf;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
@@ -236,7 +237,7 @@ public class GerenciarProdutos extends javax.swing.JInternalFrame {
         txtNomedoProduto.setText("");
         txtQuantidade.setText("");
         txtPreco.setText("");
-
+        
     }//GEN-LAST:event_BotaoAdicionarProdutoActionPerformed
 
     private void BotaoRemoverProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoRemoverProdutoActionPerformed
