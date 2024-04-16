@@ -23,26 +23,31 @@ import model.bean.Produtos;
 public class ProdutoDAO {
     
     public void create(Produtos p){
-      
-        Connection con = ConnectionFactory.getConnection();
-        PreparedStatement stmt = null; 
-        
-        try {
-            stmt = con.prepareStatement("INSERT INTO produtos (nomeProduto,quantidade,preco)VALUES(?,?,?)");
-            stmt.setString(1, p.getNomeProdutos());
-            stmt.setInt(2, p.getQuantidade());
-            stmt.setDouble(3, p.getPreco());
-            
-            stmt.executeUpdate();
-            
-            JOptionPane.showMessageDialog(null, "Salvo com Sucesso ");
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao Salvar: "+ex);
-        } finally{
-            ConnectionFactory.closeConnection(con, stmt);
+
+    Connection con = ConnectionFactory.getConnection();
+    PreparedStatement stmt = null;
+
+    try {
+        stmt = con.prepareStatement("INSERT INTO produtos (nomeProduto,quantidade,preco)VALUES(?,?,?)");
+        stmt.setString(1, p.getNomeProdutos());
+        stmt.setInt(2, p.getQuantidade());
+        stmt.setDouble(3, p.getPreco());
+
+        int affectedRows = stmt.executeUpdate();
+
+        if (affectedRows > 0) {
+            JOptionPane.showMessageDialog(null, "Salvo com Sucesso!");
+        } else {
+            JOptionPane.showMessageDialog(null, "Erro ao salvar. Verifique os dados.");
         }
-    
+
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex.getMessage());
+    } finally {
+        ConnectionFactory.closeConnection(con, stmt);
     }
+}
+
      
     public List<Produtos> read(){
       
