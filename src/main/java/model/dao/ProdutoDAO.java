@@ -35,11 +35,10 @@ public class ProdutoDAO {
             
             stmt.executeUpdate();
             
-            
             JOptionPane.showMessageDialog(null, "Salvo com Sucesso ");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao Salvar: "+ex);
-        }finally{
+        } finally{
             ConnectionFactory.closeConnection(con, stmt);
         }
     
@@ -67,12 +66,10 @@ public class ProdutoDAO {
                produto.setPreco(rs.getDouble("preco"));
                produtos.add(produto);
             }
-            
-            
-            
+    
         } catch (SQLException ex) {
             Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }finally{
+        } finally {
             ConnectionFactory.closeConnection(con, stmt, rs);
         } 
        
