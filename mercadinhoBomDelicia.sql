@@ -31,3 +31,5 @@ INSERT INTO produtos (nomeProduto,quantidade,preco)VALUES(?,?,?);
 SELECT * FROM produtos;
 
 UPDATE produtos SET nomeProduto = ?,quantidade = ?,preco = ? WHERE id_produto = ?;
+
+DELETE FROM produtos WHERE id_produto = ?;

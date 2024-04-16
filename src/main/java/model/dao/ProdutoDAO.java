@@ -93,9 +93,29 @@ public class ProdutoDAO {
             
             stmt.executeUpdate();
             
-            JOptionPane.showMessageDialog(null, "Salvo com Sucesso ");
+            JOptionPane.showMessageDialog(null, "Atualizado com Sucesso ");
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao Salvar: "+ex);
+            JOptionPane.showMessageDialog(null, "Erro ao Atualizar: "+ex);
+        } finally{
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+    
+    }
+    
+    public void delete(Produtos p){
+      
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null; 
+        
+        try {
+            stmt = con.prepareStatement("DELETE FROM produtos WHERE id_produto = ?");
+            stmt.setInt(1, p.getId_produtos());
+            
+            stmt.executeUpdate();
+            
+            JOptionPane.showMessageDialog(null, "Removido com Sucesso ");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao Remover: "+ex);
         } finally{
             ConnectionFactory.closeConnection(con, stmt);
         }
