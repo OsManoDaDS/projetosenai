@@ -115,12 +115,8 @@ public class telalogin extends javax.swing.JFrame {
     }//GEN-LAST:event_txtSenhaActionPerformed
 
     private void BotaoLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoLoginActionPerformed
-       
-        if (txtUsuario.getText().equals("usuario") && new String (txtSenha.getPassword()).equals("123")){
-            JOptionPane.showMessageDialog(null, "SEJA BEM VINDO!");
-        }else {
-            JOptionPane.showMessageDialog(null, "Usuario ou Senha incorreta tente novamente!");
-        }
+            
+         
     }//GEN-LAST:event_BotaoLoginActionPerformed
 
     /**
