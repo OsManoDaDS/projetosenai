@@ -20,6 +20,7 @@ CREATE TABLE if not exists produtos (
 CREATE TABLE if not exists funcionarios (
     id_funcionarios int not null auto_increment PRIMARY KEY,
     nomeFuncionario varchar(100) not null,
+    senha varchar(100) not null,
     email varchar(100) not null,
     cargo varchar(45) not null,
     cpf varchar(11) not null

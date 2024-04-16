@@ -27,11 +27,12 @@ public class FuncionarioDAO {
         PreparedStatement stmt = null; 
         
         try {
-            stmt = con.prepareStatement("INSERT INTO funcionarios (nomeFuncionario,email,cargo,cpf)VALUES(?,?,?,?)");
+            stmt = con.prepareStatement("INSERT INTO funcionarios (nomeFuncionario,senha,email,cargo,cpf)VALUES(?,?,?,?,?)");
             stmt.setString(1, p.getNomeFuncionario());
-            stmt.setString(2, p.getEmail());
-            stmt.setString(3, p.getCargo());
-            stmt.setString(4, p.getCpf());
+            stmt.setString(2, p.getSenha());
+            stmt.setString(3, p.getEmail());
+            stmt.setString(4, p.getCargo());
+            stmt.setString(5, p.getCpf());
             
             stmt.executeUpdate();
             
@@ -42,6 +43,38 @@ public class FuncionarioDAO {
             ConnectionFactory.closeConnection(con, stmt);
         }
     
+    }
+    
+    public boolean checkLogin(){
+      
+       Connection con = ConnectionFactory.getConnection();
+       PreparedStatement stmt = null;  
+       ResultSet rs = null;
+       boolean check = false;
+       
+       
+        try {
+            stmt = con.prepareStatement("SELECT * FROM funcionarios WHERE email = ? and senha = ?");
+            stmt.setString(1, "email");
+            stmt.setString(2, "senha");
+            
+            rs = stmt.executeQuery();
+            
+            if(rs.next()){
+                
+                check = true;
+             
+            }
+    
+        } catch (SQLException ex) {
+            Logger.getLogger(FuncionarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        } 
+       
+        
+        return check; 
+      
     }
     
     public List<Funcionarios> read(){
@@ -62,6 +95,7 @@ public class FuncionarioDAO {
                
                funcionario.setId_funcionarios(rs.getInt("id_funcionarios"));
                funcionario.setNomeFuncionario(rs.getString("nomeFuncionario"));
+               funcionario.setSenha(rs.getString("senha"));
                funcionario.setEmail(rs.getString("email"));
                funcionario.setCargo(rs.getString("cargo"));
                funcionario.setCpf(rs.getString("cpf"));

@@ -11,6 +11,7 @@ package model.bean;
 public class Funcionarios {
     private int id_funcionarios;
     private String nomeFuncionario;
+    private String senha;
     private String email;
     private String cargo;
     private String cpf;
@@ -29,6 +30,14 @@ public class Funcionarios {
 
     public void setNomeFuncionario(String nomeFuncionario) {
         this.nomeFuncionario = nomeFuncionario;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
     public String getEmail() {
