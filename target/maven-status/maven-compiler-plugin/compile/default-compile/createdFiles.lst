@@ -12,6 +12,7 @@ view\TelaPrincipalMDI$3.class
 view\RelatorioGeral$3.class
 view\TelaPrincipalMDIFinanceiro$2.class
 view\telalogin$3.class
+model\dao\FuncionarioDAO.class
 view\TelaLoginSDI$5.class
 view\GerenciarProdutos$8.class
 view\telalogin.class

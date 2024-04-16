@@ -232,22 +232,21 @@ public class GerenciarProdutos extends javax.swing.JInternalFrame {
 
     private void BotaoAdicionarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoAdicionarProdutoActionPerformed
 
-
-        
-        DefaultTableModel Produtos = (DefaultTableModel) JtProdutos.getModel();
-        Object[] dados = {0+1, txtNomedoProduto.getText(), txtQuantidade.getText(), txtPreco.getText()};
-        Produtos.addRow(dados);
+//      DefaultTableModel Produtos = (DefaultTableModel) JtProdutos.getModel();
+//      Object[] dados = {0+1, txtNomedoProduto.getText(), txtQuantidade.getText(), txtPreco.getText()};
+//      Produtos.addRow(dados);
         
         Produtos p  = new Produtos();
         ProdutoDAO dao = new ProdutoDAO();
+        
         p.setNomeProdutos(txtNomedoProduto.getText());
         p.setQuantidade(Integer.parseInt(txtQuantidade.getText()));
         p.setPreco(Double.parseDouble(txtPreco.getText()));
         dao.create(p);
         
-        txtNomedoProduto.setText("");
-        txtQuantidade.setText("");
-        txtPreco.setText("");
+//        txtNomedoProduto.setText("");
+//        txtQuantidade.setText("");
+//        txtPreco.setText("");
         
     }//GEN-LAST:event_BotaoAdicionarProdutoActionPerformed
 
