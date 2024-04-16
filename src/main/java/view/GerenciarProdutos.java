@@ -15,6 +15,8 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
+import model.bean.Produtos;
+import model.dao.ProdutoDAO;
 
 /**
  *
@@ -196,7 +198,7 @@ public class GerenciarProdutos extends javax.swing.JInternalFrame {
                         .addComponent(txtNomedoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -230,9 +232,18 @@ public class GerenciarProdutos extends javax.swing.JInternalFrame {
 
     private void BotaoAdicionarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoAdicionarProdutoActionPerformed
 
+
+        
         DefaultTableModel Produtos = (DefaultTableModel) JtProdutos.getModel();
         Object[] dados = {0+1, txtNomedoProduto.getText(), txtQuantidade.getText(), txtPreco.getText()};
         Produtos.addRow(dados);
+        
+        Produtos p  = new Produtos();
+        ProdutoDAO dao = new ProdutoDAO();
+        p.setNomeProdutos(txtNomedoProduto.getText());
+        p.setQuantidade(Integer.parseInt(txtQuantidade.getText()));
+        p.setPreco(Double.parseDouble(txtPreco.getText()));
+        dao.create(p);
         
         txtNomedoProduto.setText("");
         txtQuantidade.setText("");

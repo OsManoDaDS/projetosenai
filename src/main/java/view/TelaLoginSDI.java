@@ -63,7 +63,7 @@ public class TelaLoginSDI extends javax.swing.JFrame {
         jPanel2.setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel1.setText("Usuário");
+        jLabel1.setText("CPF");
         jPanel2.add(jLabel1);
         jLabel1.setBounds(40, 190, 50, 16);
         jPanel2.add(txtUsuario);
@@ -172,8 +172,9 @@ public class TelaLoginSDI extends javax.swing.JFrame {
 
     private void txtSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSenhaKeyPressed
         
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER);{
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
         }
+        
         
     }//GEN-LAST:event_txtSenhaKeyPressed
 
