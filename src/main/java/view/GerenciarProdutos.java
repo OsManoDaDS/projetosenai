@@ -8,6 +8,7 @@ import com.formdev.flatlaf.FlatDarculaLaf;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
@@ -28,8 +29,8 @@ public class GerenciarProdutos extends javax.swing.JInternalFrame {
         initComponents();
         
         
-        DefaultTableModel modelo = (DefaultTableModel) jTProdutos.getModel();
-        jTProdutos.setRowSorter(new TableRowSorter(modelo));
+        DefaultTableModel modelo = (DefaultTableModel) JtProdutos.getModel();
+        JtProdutos.setRowSorter(new TableRowSorter(modelo));
         
         SwingUtilities.invokeLater(() -> {
         
@@ -62,7 +63,7 @@ public class GerenciarProdutos extends javax.swing.JInternalFrame {
         txtPreco = new javax.swing.JTextField();
         txtQuantidade = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTProdutos = new javax.swing.JTable();
+        JtProdutos = new javax.swing.JTable();
         BotaoAdicionarProduto = new javax.swing.JButton();
         BotaoRemoverProduto = new javax.swing.JButton();
         BotaoAlterarProduto = new javax.swing.JButton();
@@ -88,40 +89,37 @@ public class GerenciarProdutos extends javax.swing.JInternalFrame {
             }
         });
 
-        jTProdutos.setModel(new javax.swing.table.DefaultTableModel(
+        JtProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Nome", "Preço", "Quantidade"
+                "ID", "Nome", "Quantidade", "Preço"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
-            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jTProdutos.addMouseListener(new java.awt.event.MouseAdapter() {
+        JtProdutos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTProdutosMouseClicked(evt);
+                JtProdutosMouseClicked(evt);
             }
         });
-        jTProdutos.addKeyListener(new java.awt.event.KeyAdapter() {
+        JtProdutos.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTProdutosKeyReleased(evt);
+                JtProdutosKeyReleased(evt);
             }
         });
-        jScrollPane1.setViewportView(jTProdutos);
+        jScrollPane1.setViewportView(JtProdutos);
+        if (JtProdutos.getColumnModel().getColumnCount() > 0) {
+            JtProdutos.getColumnModel().getColumn(0).setResizable(false);
+            JtProdutos.getColumnModel().getColumn(2).setResizable(false);
+        }
 
         BotaoAdicionarProduto.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         BotaoAdicionarProduto.setText("Adicionar Produto");
@@ -149,6 +147,11 @@ public class GerenciarProdutos extends javax.swing.JInternalFrame {
 
         BotaoSalvarTabela.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         BotaoSalvarTabela.setText("Salvar");
+        BotaoSalvarTabela.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotaoSalvarTabelaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -227,47 +230,76 @@ public class GerenciarProdutos extends javax.swing.JInternalFrame {
 
     private void BotaoAdicionarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoAdicionarProdutoActionPerformed
 
+        DefaultTableModel Produtos = (DefaultTableModel) JtProdutos.getModel();
+        Object[] dados = {0+1, txtNomedoProduto.getText(), txtQuantidade.getText(), txtPreco.getText()};
+        Produtos.addRow(dados);
         
-
-
+        txtNomedoProduto.setText("");
+        txtQuantidade.setText("");
+        txtPreco.setText("");
+        
     }//GEN-LAST:event_BotaoAdicionarProdutoActionPerformed
 
     private void BotaoRemoverProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoRemoverProdutoActionPerformed
-
-           
-
-
+        
+        if (JtProdutos.getSelectedRow() != -1){
+            DefaultTableModel Produtos = (DefaultTableModel) JtProdutos.getModel();
+            Produtos.removeRow(JtProdutos.getSelectedRow());
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Produto não selecionado");
+        }
+        
+        txtNomedoProduto.setText("");
+        txtQuantidade.setText("");
+        txtPreco.setText("");
+        
     }//GEN-LAST:event_BotaoRemoverProdutoActionPerformed
 
-    private void jTProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTProdutosMouseClicked
+    private void JtProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JtProdutosMouseClicked
 
-    if(jTProdutos.getSelectedRow() != -1){
-               txtNomedoProduto.setText(jTProdutos.getValueAt(jTProdutos.getSelectedRow(), 1).toString());
-               txtPreco.setText(jTProdutos.getValueAt(jTProdutos.getSelectedRow(), 2).toString());
-               txtQuantidade.setText(jTProdutos.getValueAt(jTProdutos.getSelectedRow(), 3).toString());
-           }
+        if(JtProdutos.getSelectedRow() != -1){
+            txtNomedoProduto.setText(JtProdutos.getValueAt(JtProdutos.getSelectedRow(), 1).toString());
+            txtQuantidade.setText(JtProdutos.getValueAt(JtProdutos.getSelectedRow(), 2).toString());
+            txtPreco.setText(JtProdutos.getValueAt(JtProdutos.getSelectedRow(), 3).toString());
 
+        }
 
+    }//GEN-LAST:event_JtProdutosMouseClicked
 
-    }//GEN-LAST:event_jTProdutosMouseClicked
+    private void JtProdutosKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JtProdutosKeyReleased
 
-    private void jTProdutosKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTProdutosKeyReleased
+        if(JtProdutos.getSelectedRow() != -1){
+            txtNomedoProduto.setText(JtProdutos.getValueAt(JtProdutos.getSelectedRow(), 1).toString());
+            txtQuantidade.setText(JtProdutos.getValueAt(JtProdutos.getSelectedRow(), 2).toString());
+            txtPreco.setText(JtProdutos.getValueAt(JtProdutos.getSelectedRow(), 3).toString());
 
+        }
 
-       if(jTProdutos.getSelectedRow() != -1){
-           txtNomedoProduto.setText(jTProdutos.getValueAt(jTProdutos.getSelectedRow(), 1).toString());
-           txtPreco.setText(jTProdutos.getValueAt(jTProdutos.getSelectedRow(), 2).toString());
-           txtQuantidade.setText(jTProdutos.getValueAt(jTProdutos.getSelectedRow(), 3).toString());
-       }
-
-
-    }//GEN-LAST:event_jTProdutosKeyReleased
+    }//GEN-LAST:event_JtProdutosKeyReleased
 
     private void BotaoAlterarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoAlterarProdutoActionPerformed
-
-      
+        
+        if (JtProdutos.getSelectedRow() != -1){
+            JtProdutos.setValueAt(txtNomedoProduto.getText(), JtProdutos.getSelectedRow(), 1);
+            JtProdutos.setValueAt(txtQuantidade.getText(), JtProdutos.getSelectedRow(), 2);
+            JtProdutos.setValueAt(txtPreco.getText(), JtProdutos.getSelectedRow(), 3);
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Produto não selecionado");
+        }
+        
+        txtNomedoProduto.setText("");
+        txtQuantidade.setText("");
+        txtPreco.setText("");
          
     }//GEN-LAST:event_BotaoAlterarProdutoActionPerformed
+
+    private void BotaoSalvarTabelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoSalvarTabelaActionPerformed
+            
+        dispose();
+        
+    }//GEN-LAST:event_BotaoSalvarTabelaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -275,11 +307,11 @@ public class GerenciarProdutos extends javax.swing.JInternalFrame {
     private javax.swing.JButton BotaoAlterarProduto;
     private javax.swing.JButton BotaoRemoverProduto;
     private javax.swing.JButton BotaoSalvarTabela;
+    private javax.swing.JTable JtProdutos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTProdutos;
     private javax.swing.JTextField txtNomedoProduto;
     private javax.swing.JTextField txtPreco;
     private javax.swing.JTextField txtQuantidade;
