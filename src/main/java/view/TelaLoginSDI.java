@@ -59,6 +59,7 @@ public class TelaLoginSDI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel2.setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -96,9 +97,9 @@ public class TelaLoginSDI extends javax.swing.JFrame {
         jPanel2.add(BotaoLogin);
         BotaoLogin.setBounds(360, 340, 100, 27);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Grey and Black Simple Icon Business Logo (2).png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Orange and Gray Tag Cart Virtual Shop Logo.png"))); // NOI18N
         jPanel2.add(jLabel2);
-        jLabel2.setBounds(100, 20, 260, 140);
+        jLabel2.setBounds(70, 10, 320, 180);
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton1.setText("Sair");
