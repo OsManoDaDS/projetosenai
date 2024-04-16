@@ -12,6 +12,7 @@ view\TelaPrincipalMDI$3.class
 view\RelatorioGeral$3.class
 view\TelaPrincipalMDIFinanceiro$2.class
 view\telalogin$3.class
+view\TelaLoginSDI$5.class
 view\GerenciarProdutos$8.class
 view\telalogin.class
 view\TelaPrincipal.class
@@ -21,11 +22,13 @@ view\GerenciarProdutos$6.class
 view\TelaInicialSDI.class
 view\TelaLoginSDI$4.class
 view\TelaPrincipalMDIFinanceiro$1.class
+model\bean\Produtos.class
 view\TelaPrincipalMDI.class
 view\TelaPrincipalMDI$2.class
 view\TelaPrincipalMDIRepositor$2.class
 view\telalogin$2.class
 view\TelaInicial$2.class
+connection\ConnectionFactory.class
 view\RelatorioGeral$2.class
 view\TelaInicial$1.class
 view\TelaPrincipalMDI$5.class
@@ -33,6 +36,7 @@ view\GerenciarFuncionarios$1.class
 view\TelaLoginSDI$3.class
 view\telalogin$1.class
 view\TelaCadastroSDI1$3.class
+model\bean\Funcionarios.class
 view\GerenciarFuncionariosGerente$2.class
 view\TelaPrincipal$3.class
 view\TelaCadastroSDI1.class

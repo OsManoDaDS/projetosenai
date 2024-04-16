@@ -46,6 +46,7 @@ public class telalogin extends javax.swing.JFrame {
     private void initComponents() {
 
         jSpinner1 = new javax.swing.JSpinner();
+        jPasswordField1 = new javax.swing.JPasswordField();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtUsuario = new javax.swing.JTextField();
@@ -53,6 +54,8 @@ public class telalogin extends javax.swing.JFrame {
         txtSenha = new javax.swing.JPasswordField();
         BotaoLogin = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+
+        jPasswordField1.setText("jPasswordField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -87,7 +90,7 @@ public class telalogin extends javax.swing.JFrame {
             }
         });
         jPanel2.add(BotaoLogin);
-        BotaoLogin.setBounds(350, 330, 72, 27);
+        BotaoLogin.setBounds(360, 330, 72, 27);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Grey and Black Simple Icon Business Logo (2).png"))); // NOI18N
         jPanel2.add(jLabel2);
@@ -160,6 +163,7 @@ public class telalogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JPasswordField txtSenha;
     private javax.swing.JTextField txtUsuario;

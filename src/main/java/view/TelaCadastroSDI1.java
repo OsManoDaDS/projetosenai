@@ -202,7 +202,7 @@ private void validateAndSave() {
 
 private void saveData() {
     JOptionPane.showMessageDialog(this, "Cadastro realizado com Sucesso!! Aguarde a liberação do Administrador.");
-    dispose();
+    this.dispose();
 }
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
