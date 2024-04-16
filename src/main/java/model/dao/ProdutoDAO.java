@@ -18,7 +18,7 @@ import model.bean.Produtos;
 
 /**
  *
- * @author renan
+ * @author renan, pedroportales
  */
 public class ProdutoDAO {
     
@@ -28,7 +28,7 @@ public class ProdutoDAO {
         PreparedStatement stmt = null; 
         
         try {
-            stmt = con.prepareStatement("INSERT INTO produto (nomeProduto,quantidade,preco)VALUES(?,?,?)");
+            stmt = con.prepareStatement("INSERT INTO produtos (nomeProduto,quantidade,preco)VALUES(?,?,?)");
             stmt.setString(1, p.getNomeProdutos());
             stmt.setInt(2, p.getQuantidade());
             stmt.setDouble(3, p.getPreco());
@@ -44,7 +44,7 @@ public class ProdutoDAO {
     
     }
      
-   public List<Produtos> read(){
+    public List<Produtos> read(){
       
        Connection con = ConnectionFactory.getConnection();
        PreparedStatement stmt = null;  
@@ -79,6 +79,47 @@ public class ProdutoDAO {
                 
     }
    
+    public void update(Produtos p){
+      
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null; 
+        
+        try {
+            stmt = con.prepareStatement("UPDATE produtos SET nomeProduto = ?,quantidade = ?,preco = ? WHERE id_produto = ?");
+            stmt.setString(1, p.getNomeProdutos());
+            stmt.setInt(2, p.getQuantidade());
+            stmt.setDouble(3, p.getPreco());
+            stmt.setInt(4, p.getId_produtos());
             
+            stmt.executeUpdate();
+            
+            JOptionPane.showMessageDialog(null, "Atualizado com Sucesso ");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao Atualizar: "+ex);
+        } finally{
+            ConnectionFactory.closeConnection(con, stmt);
+        }
     
+    }
+    
+    public void delete(Produtos p){
+      
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null; 
+        
+        try {
+            stmt = con.prepareStatement("DELETE FROM produtos WHERE id_produto = ?");
+            stmt.setInt(1, p.getId_produtos());
+            
+            stmt.executeUpdate();
+            
+            JOptionPane.showMessageDialog(null, "Removido com Sucesso ");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao Remover: "+ex);
+        } finally{
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+    
+    }
+     
 }
