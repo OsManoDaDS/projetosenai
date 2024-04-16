@@ -172,8 +172,9 @@ public class TelaLoginSDI extends javax.swing.JFrame {
 
     private void txtSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSenhaKeyPressed
         
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER);{
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
         }
+        
         
     }//GEN-LAST:event_txtSenhaKeyPressed
 
