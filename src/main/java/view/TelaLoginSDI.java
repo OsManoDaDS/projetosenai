@@ -50,7 +50,7 @@ public class TelaLoginSDI extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        txtUsuario = new javax.swing.JTextField();
+        txtCpfLogin = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         txtSenha = new javax.swing.JPasswordField();
         BotaoLogin = new javax.swing.JButton();
@@ -66,8 +66,8 @@ public class TelaLoginSDI extends javax.swing.JFrame {
         jLabel1.setText("CPF");
         jPanel2.add(jLabel1);
         jLabel1.setBounds(40, 190, 50, 16);
-        jPanel2.add(txtUsuario);
-        txtUsuario.setBounds(40, 210, 280, 30);
+        jPanel2.add(txtCpfLogin);
+        txtCpfLogin.setBounds(40, 210, 280, 30);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("Senha");
@@ -150,11 +150,11 @@ public class TelaLoginSDI extends javax.swing.JFrame {
     
         try {
                 
-            if (txtUsuario == null || txtSenha == null) {
+            if (txtCpfLogin == null || txtSenha == null) {
             throw new NullPointerException("txtUsuario ou txtSenha vazios");
             }
 
-            if (this.checklogin(txtUsuario.getText(), new String (txtSenha.getPassword()))) {
+            if (this.checklogin(txtCpfLogin.getText(), new String (txtSenha.getPassword()))) {
             JOptionPane.showMessageDialog(null, "SEJA BEM VINDO!");
             new TelaPrincipalMDI().setVisible(true);
             this.dispose();
@@ -228,7 +228,7 @@ public class TelaLoginSDI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JTextField txtCpfLogin;
     private javax.swing.JPasswordField txtSenha;
-    private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }
