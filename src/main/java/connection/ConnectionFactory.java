@@ -26,9 +26,8 @@ public class ConnectionFactory {
         try{  
             Class.forName(DRIVER);
             return DriverManager.getConnection(URL, USER, PASS);
-        }catch (ClassNotFoundException | SQLException ex){
+        } catch (ClassNotFoundException | SQLException ex){
             throw new RuntimeException("Erro na Conexão: ", ex);
-            
         }
         
     }
@@ -38,25 +37,23 @@ public class ConnectionFactory {
             if(con!=null){           
                 con.close();
             }
-        }catch (SQLException ex){
+        } catch (SQLException ex){
             Logger.getLogger(ConnectionFactory.class.getName()).log(Level.SEVERE, null, ex);
         }
-        }    
+    }    
     
     public static void closeConnection (Connection con, PreparedStatement stmt){
         
         closeConnection(con);
         
-        try{    
-            
+        try{            
            if(stmt != null){ 
                stmt.close(); 
             }
-           
-        }catch (SQLException ex){
+        } catch (SQLException ex){
             Logger.getLogger(ConnectionFactory.class.getName()).log(Level.SEVERE, null, ex);
         }
-        }    
+    }    
     
       
     public static void closeConnection (Connection con, PreparedStatement stmt, ResultSet rs){
@@ -68,16 +65,12 @@ public class ConnectionFactory {
                rs.close();   
             }
            
-        }catch (SQLException ex){
+        } catch (SQLException ex){
             Logger.getLogger(ConnectionFactory.class.getName()).log(Level.SEVERE, null, ex);
         }
-        }      
-    
-    
-    
- 
-    
-    }
+    }      
+
+}
   
     
 
