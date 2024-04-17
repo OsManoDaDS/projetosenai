@@ -56,10 +56,29 @@ public final class GerenciarProdutos extends javax.swing.JInternalFrame {
     public void readJtable(){
         
         DefaultTableModel modelo = (DefaultTableModel) JtProdutos.getModel();
-//        modelo.setNumRows(0);
+        modelo.setNumRows(0);
         ProdutoDAO pdao = new ProdutoDAO();
         
         for(Produtos p: pdao.read()){
+            
+            modelo.addRow(new Object[]{
+                
+                p.getId_produtos(),
+                p.getNomeProdutos(),
+                p.getQuantidade(),
+                p.getPreco()
+            
+            });
+        }
+    }
+    
+        public void readJtableForQuant(Integer quant){
+        
+        DefaultTableModel modelo = (DefaultTableModel) JtProdutos.getModel();
+        modelo.setNumRows(0);
+        ProdutoDAO pdao = new ProdutoDAO();
+        
+        for(Produtos p: pdao.readQuant(quant)){
             
             modelo.addRow(new Object[]{
                 
@@ -96,6 +115,8 @@ public final class GerenciarProdutos extends javax.swing.JInternalFrame {
         BotaoRemoverProduto = new javax.swing.JButton();
         BotaoAlterarProduto = new javax.swing.JButton();
         BotaoSalvarTabela = new javax.swing.JButton();
+        txtBuscar = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 0, 0));
         setClosable(true);
@@ -177,6 +198,19 @@ public final class GerenciarProdutos extends javax.swing.JInternalFrame {
             }
         });
 
+        txtBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBuscarActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("BUSCAR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -190,13 +224,17 @@ public final class GerenciarProdutos extends javax.swing.JInternalFrame {
                     .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(80, 80, 80)
+                        .addGap(86, 86, 86)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(328, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtBuscar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(141, 141, 141)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(BotaoAlterarProduto, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
                             .addComponent(BotaoAdicionarProduto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
@@ -205,7 +243,7 @@ public final class GerenciarProdutos extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 178, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 192, Short.MAX_VALUE)
                 .addComponent(BotaoSalvarTabela)
                 .addGap(25, 25, 25))
         );
@@ -230,10 +268,14 @@ public final class GerenciarProdutos extends javax.swing.JInternalFrame {
                         .addGap(8, 8, 8)
                         .addComponent(BotaoAdicionarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(21, 21, 21)
-                .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(14, 14, 14)
@@ -256,21 +298,17 @@ public final class GerenciarProdutos extends javax.swing.JInternalFrame {
       
         Produtos p  = new Produtos();
         ProdutoDAO dao = new ProdutoDAO();
+        
         p.setNomeProdutos(txtNomedoProduto.getText());
         p.setQuantidade(Integer.parseInt(txtQuantidade.getText()));
         p.setPreco(Double.parseDouble(txtPreco.getText()));
         dao.create(p);
-      
-      DefaultTableModel Produtos = (DefaultTableModel) JtProdutos.getModel();
-      Object[] dados = {p.getId_produtos()  , txtNomedoProduto.getText(), txtQuantidade.getText(), txtPreco.getText()};
-      Produtos.addRow(dados);
         
+        txtNomedoProduto.setText("");
+        txtQuantidade.setText("");
+        txtPreco.setText("");
         
-      txtNomedoProduto.setText("");
-      txtQuantidade.setText("");
-      txtPreco.setText("");
-        
-       readJtable(); 
+        readJtable(); 
     
         
     }//GEN-LAST:event_BotaoAdicionarProdutoActionPerformed
@@ -278,8 +316,18 @@ public final class GerenciarProdutos extends javax.swing.JInternalFrame {
     private void BotaoRemoverProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoRemoverProdutoActionPerformed
         
         if (JtProdutos.getSelectedRow() != -1){
-            DefaultTableModel Produtos = (DefaultTableModel) JtProdutos.getModel();
-            Produtos.removeRow(JtProdutos.getSelectedRow());
+            
+            Produtos p  = new Produtos();
+            ProdutoDAO dao = new ProdutoDAO();
+        
+            p.setId_produtos((int)JtProdutos.getValueAt(JtProdutos.getSelectedRow(), 0));
+            dao.delete(p);
+        
+        txtNomedoProduto.setText("");
+        txtQuantidade.setText("");
+        txtPreco.setText("");
+        
+        readJtable();
         }
         else{
             JOptionPane.showMessageDialog(null, "Produto não selecionado");
@@ -315,19 +363,24 @@ public final class GerenciarProdutos extends javax.swing.JInternalFrame {
 
     private void BotaoAlterarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoAlterarProdutoActionPerformed
         
-        if (JtProdutos.getSelectedRow() != -1){
-            JtProdutos.setValueAt(txtNomedoProduto.getText(), JtProdutos.getSelectedRow(), 1);
-            JtProdutos.setValueAt(txtQuantidade.getText(), JtProdutos.getSelectedRow(), 2);
-            JtProdutos.setValueAt(txtPreco.getText(), JtProdutos.getSelectedRow(), 3);
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "Produto não selecionado");
-        }
+        if(JtProdutos.getSelectedRow() != -1){
+            
+        Produtos p  = new Produtos();
+        ProdutoDAO dao = new ProdutoDAO();
+        
+        p.setNomeProdutos(txtNomedoProduto.getText());
+        p.setQuantidade(Integer.parseInt(txtQuantidade.getText()));
+        p.setPreco(Double.parseDouble(txtPreco.getText()));
+        p.setId_produtos((int)JtProdutos.getValueAt(JtProdutos.getSelectedRow(), 0));
+        dao.update(p);
         
         txtNomedoProduto.setText("");
         txtQuantidade.setText("");
         txtPreco.setText("");
-         
+        
+        readJtable();
+        
+        }
     }//GEN-LAST:event_BotaoAlterarProdutoActionPerformed
 
     private void BotaoSalvarTabelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoSalvarTabelaActionPerformed
@@ -336,6 +389,16 @@ public final class GerenciarProdutos extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_BotaoSalvarTabelaActionPerformed
 
+    private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBuscarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        readJtableForQuant(Integer.parseInt(txtBuscar.getText()));
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotaoAdicionarProduto;
@@ -343,10 +406,12 @@ public final class GerenciarProdutos extends javax.swing.JInternalFrame {
     private javax.swing.JButton BotaoRemoverProduto;
     private javax.swing.JButton BotaoSalvarTabela;
     private javax.swing.JTable JtProdutos;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtNomedoProduto;
     private javax.swing.JTextField txtPreco;
     private javax.swing.JTextField txtQuantidade;

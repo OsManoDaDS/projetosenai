@@ -107,6 +107,40 @@ public class ProdutoDAO {
     
     }
     
+    public List<Produtos> readQuant(Integer quant){
+      
+       Connection con = ConnectionFactory.getConnection();
+       PreparedStatement stmt = null;  
+       ResultSet rs = null;
+       
+       List<Produtos> produtos = new ArrayList<>();
+       
+        try {
+            stmt = con.prepareStatement("SELECT * FROM produtos WHERE quantidade LIKE ?");
+            stmt.setInt(1, quant);
+            rs = stmt.executeQuery();
+            
+            while(rs.next()){
+            
+               Produtos produto = new Produtos();
+               
+               produto.setId_produtos(rs.getInt("id_produtos"));
+               produto.setNomeProdutos(rs.getString("nomeProdutos"));
+               produto.setQuantidade(rs.getInt("quantidade"));
+               produto.setPreco(rs.getDouble("preco"));
+               produtos.add(produto);
+            }
+    
+        } catch (SQLException ex) {
+            Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        } 
+       
+        
+        return produtos; 
+    }
+    
     public void delete(Produtos p){
       
         Connection con = ConnectionFactory.getConnection();
