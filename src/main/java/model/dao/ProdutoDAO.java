@@ -66,7 +66,7 @@ public class ProdutoDAO {
                Produtos produto = new Produtos();
                
                produto.setId_produtos(rs.getInt("id_produtos"));
-               produto.setNomeProdutos(rs.getString("nomeProdutos"));
+               produto.setNomeProdutos(rs.getString("nomeProduto"));
                produto.setQuantidade(rs.getInt("quantidade"));
                produto.setPreco(rs.getDouble("preco"));
                produtos.add(produto);
@@ -90,7 +90,7 @@ public class ProdutoDAO {
         PreparedStatement stmt = null; 
         
         try {
-            stmt = con.prepareStatement("UPDATE produtos SET nomeProduto = ?,quantidade = ?,preco = ? WHERE id_produto = ?");
+            stmt = con.prepareStatement("UPDATE produtos SET nomeProduto = ?,quantidade = ?,preco = ? WHERE id_produtos = ?");
             stmt.setString(1, p.getNomeProdutos());
             stmt.setInt(2, p.getQuantidade());
             stmt.setDouble(3, p.getPreco());
@@ -125,7 +125,7 @@ public class ProdutoDAO {
                Produtos produto = new Produtos();
                
                produto.setId_produtos(rs.getInt("id_produtos"));
-               produto.setNomeProdutos(rs.getString("nomeProdutos"));
+               produto.setNomeProdutos(rs.getString("nomeProduto"));
                produto.setQuantidade(rs.getInt("quantidade"));
                produto.setPreco(rs.getDouble("preco"));
                produtos.add(produto);
@@ -147,7 +147,7 @@ public class ProdutoDAO {
         PreparedStatement stmt = null; 
         
         try {
-            stmt = con.prepareStatement("DELETE FROM produtos WHERE id_produto = ?");
+            stmt = con.prepareStatement("DELETE FROM produtos WHERE id_produtos = ?");
             stmt.setInt(1, p.getId_produtos());
             
             stmt.executeUpdate();

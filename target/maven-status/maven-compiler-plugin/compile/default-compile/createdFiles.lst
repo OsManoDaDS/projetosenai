@@ -18,6 +18,7 @@ view\GerenciarProdutos$8.class
 view\telalogin.class
 view\TelaPrincipal.class
 view\GerenciarFuncionarios$2.class
+view\GerenciarProdutos$9.class
 view\GerenciarProdutos$2.class
 view\GerenciarProdutos$6.class
 view\TelaInicialSDI.class
@@ -41,6 +42,7 @@ model\dao\ProdutoDAO.class
 model\bean\Funcionarios.class
 view\GerenciarFuncionariosGerente$2.class
 view\TelaPrincipal$3.class
+view\GerenciarProdutos$10.class
 view\TelaCadastroSDI1.class
 view\GerenciarProdutos$3.class
 view\TelaInicialSDI$1.class
