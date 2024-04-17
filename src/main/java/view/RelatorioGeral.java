@@ -76,8 +76,6 @@ public class RelatorioGeral extends javax.swing.JInternalFrame {
     
     public void readPrecoRelatorio() {
         ProdutoDAO pdao = new ProdutoDAO();
-        
-       
         txtValorTotal.setText(Double.toString(pdao.readPreco()));
 //            txtValorTotal.setText("Teste");
         
