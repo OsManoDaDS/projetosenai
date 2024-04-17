@@ -31,13 +31,11 @@ public class GerenciarProdutos extends javax.swing.JInternalFrame {
     public GerenciarProdutos() {
         
         initComponents();
-        
-        
         DefaultTableModel modelo = (DefaultTableModel) JtProdutos.getModel();
         JtProdutos.setRowSorter(new TableRowSorter(modelo));
         
         readJtable();
-        
+         
         SwingUtilities.invokeLater(() -> {
         
             try {
@@ -48,14 +46,13 @@ public class GerenciarProdutos extends javax.swing.JInternalFrame {
             }
         
         });
-        
    
     }
 
     public void readJtable(){
         
-        DefaultTableModel Produtos = (DefaultTableModel) JtProdutos.getModel();
-        
+        DefaultTableModel modelo = (DefaultTableModel) JtProdutos.getModel();
+        modelo.setNumRows(0);
         ProdutoDAO pdao = new ProdutoDAO();
         
         for(Produtos p: pdao.read()){
@@ -252,11 +249,7 @@ public class GerenciarProdutos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtPrecoActionPerformed
 
     private void BotaoAdicionarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoAdicionarProdutoActionPerformed
-
-//      DefaultTableModel Produtos = (DefaultTableModel) JtProdutos.getModel();
-//      Object[] dados = {0+1, txtNomedoProduto.getText(), txtQuantidade.getText(), txtPreco.getText()};
-//      Produtos.addRow(dados);
-        
+      
         Produtos p  = new Produtos();
         ProdutoDAO dao = new ProdutoDAO();
         
@@ -264,12 +257,16 @@ public class GerenciarProdutos extends javax.swing.JInternalFrame {
         p.setQuantidade(Integer.parseInt(txtQuantidade.getText()));
         p.setPreco(Double.parseDouble(txtPreco.getText()));
         dao.create(p);
-        readJtable();
-//        txtNomedoProduto.setText("");
-//        txtQuantidade.setText("");
-//        txtPreco.setText("");
         
-   
+        readJtable();
+        
+//      txtNomedoProduto.setText("");
+//      txtQuantidade.setText("");
+//      txtPreco.setText("");
+        
+//      DefaultTableModel Produtos = (DefaultTableModel) JtProdutos.getModel();
+//      Object[] dados = {0+1, txtNomedoProduto.getText(), txtQuantidade.getText(), txtPreco.getText()};
+//      Produtos.addRow(dados);
         
     }//GEN-LAST:event_BotaoAdicionarProdutoActionPerformed
 

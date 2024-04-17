@@ -34,6 +34,7 @@ public class TelaPrincipalMDI extends javax.swing.JFrame {
             }
         
         });
+     
     }
 
     /**
@@ -127,21 +128,17 @@ public class TelaPrincipalMDI extends javax.swing.JFrame {
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
 
-         RelatorioGeral relatoriogeral = new RelatorioGeral();
-         jDesktopPane1.add(relatoriogeral);
-         relatoriogeral.setVisible(true);
+        RelatorioGeral relatoriogeral = new RelatorioGeral();
+        jDesktopPane1.add(relatoriogeral);
+        relatoriogeral.setVisible(true);
       
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         
-
-       
         GerenciarProdutos telagerenciar = new GerenciarProdutos();
-         jDesktopPane1.add(telagerenciar);
-         telagerenciar.setVisible(true);
-         
-         
+        jDesktopPane1.add(telagerenciar);
+        telagerenciar.setVisible(true);      
 
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
