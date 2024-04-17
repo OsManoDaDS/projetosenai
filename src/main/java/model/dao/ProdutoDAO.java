@@ -160,5 +160,43 @@ public class ProdutoDAO {
         }
     
     }
+    
+    public double readPreco() {
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null; 
+        
+        ResultSet rs = null;
+        
+        try {
+            rs = (ResultSet) con.prepareStatement("SELECT preco FROM produtos");
+        } catch (SQLException ex) {
+            Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        double total = 0;
+
+        try {
+            while(rs.next()) {
+                double valor = 0;
+                try {
+                    valor = rs.getDouble("preco");
+                } catch (SQLException ex) {
+                    Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                total += valor;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        ConnectionFactory.closeConnection(con, stmt);
+        
+        return total;
+        
+        
+    }
      
 }
