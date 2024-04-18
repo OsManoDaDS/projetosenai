@@ -29,7 +29,7 @@ Dentro de `src/main/java` temos 4 pacotes, sendo eles:
 
 Nesses três pacotes referentes ao banco de dados, os responsáveis foram @pedroportales e @RenanSantos01 .
 
-- `view`: Contém as classes e formulários referentes ao front-end (@IcaroSenaDev como responsável, com ) e back-end (@xeilongue e @XaolinMataPorco como responsáveis, com apoio de @) da aplicação,.
+- `view`: Contém as classes e formulários referentes ao front-end (@IcaroSenaDev como responsável, com apoio de @pedroportales) e back-end (@xeilongue e @XaolinMataPorco como responsáveis, com apoio de @IcaroSenaDev e @pedroportales) da aplicação,.
 
 ## Instruções para execução
 ### Requisitos
