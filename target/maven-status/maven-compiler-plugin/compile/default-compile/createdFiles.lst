@@ -9,7 +9,9 @@ view\TelaInicialSDI$3.class
 view\TelaPrincipal$1.class
 view\TelaPrincipalMDIRepositor$1.class
 view\TelaPrincipalMDI$3.class
+view\RelatorioGeral$3.class
 view\TelaPrincipalMDIFinanceiro$2.class
+view\GerenciarFuncionarios$3.class
 view\telalogin$3.class
 model\dao\FuncionarioDAO.class
 view\TelaLoginSDI$5.class
@@ -61,3 +63,4 @@ view\GerenciarProdutos$7.class
 view\GerenciarFuncionariosGerente$1.class
 view\TelaCadastroSDI1$2.class
 view\TelaPrincipalMDI$4.class
+view\GerenciarFuncionarios$4.class

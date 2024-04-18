@@ -37,20 +37,16 @@ public final class GerenciarProdutos extends javax.swing.JInternalFrame {
         
         readJtable();
         
+        SwingUtilities.invokeLater(() -> {
         
-//        
-//        readJtable();
-//         
-//        SwingUtilities.invokeLater(() -> {
-//        
-//            try {
-//                UIManager.setLookAndFeel(new FlatDarculaLaf());
-//                SwingUtilities.updateComponentTreeUI(this);
-//            } catch (UnsupportedLookAndFeelException ex) {
-//                Logger.getLogger(GerenciarProdutos.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//        
-//        });
+            try {
+                UIManager.setLookAndFeel(new FlatDarculaLaf());
+                SwingUtilities.updateComponentTreeUI(this);
+            } catch (UnsupportedLookAndFeelException ex) {
+                Logger.getLogger(GerenciarProdutos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+        });
     }
 
     public void readJtable(){

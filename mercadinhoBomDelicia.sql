@@ -23,7 +23,7 @@ CREATE TABLE if not exists funcionarios (
     senha varchar(100) not null,
     email varchar(100) not null,
     cargo varchar(45) not null,
-    cpf varchar(11) not null
+    cpf varchar(20) not null
   -- CONSTRAINT fk_funcionarios_produtos foreign key (produtos_id) references produtos (id)
 );
 

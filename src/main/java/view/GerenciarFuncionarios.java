@@ -5,11 +5,16 @@
 package view;
 
 import com.formdev.flatlaf.FlatDarculaLaf;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.table.DefaultTableModel;
+import model.bean.Funcionarios;
+import model.dao.FuncionarioDAO;
 
 /**
  *
@@ -23,6 +28,8 @@ public class GerenciarFuncionarios extends javax.swing.JInternalFrame {
     public GerenciarFuncionarios() {
         initComponents();
         
+        readJtable();
+        
         SwingUtilities.invokeLater(() -> {
         
             try {
@@ -34,7 +41,54 @@ public class GerenciarFuncionarios extends javax.swing.JInternalFrame {
         
         });
     }
+    
+        public void readJtable(){
+        
+        DefaultTableModel modelo = (DefaultTableModel) jTCadastro.getModel();
+        modelo.setNumRows(0);
+        FuncionarioDAO pdao = new FuncionarioDAO();
+        
+        for(Funcionarios p: pdao.read()){
+            
+            modelo.addRow(new Object[]{
+                
+                p.getNomeFuncionario(),
+                p.getEmail(),
+                p.getCpf(),
 
+         
+            });
+        }
+    }
+    public void readJtableCargo(){
+        
+        DefaultTableModel modelo = (DefaultTableModel) jTCadastro.getModel();
+        modelo.setNumRows(0);
+        FuncionarioDAO pdao = new FuncionarioDAO();
+        
+        for(Funcionarios p: pdao.read()){
+            
+            modelo.addRow(new Object[]{
+                
+                p.getNomeFuncionario(),
+                p.getEmail(),
+                p.getCargo(),
+
+         
+            });
+        }
+    }
+
+    public void atualizarTabelaCadastro() {
+    DefaultTableModel model = (DefaultTableModel) jTCadastro.getModel();
+    model.setRowCount(0);
+    
+    FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+    List<Funcionarios> funcionarios = funcionarioDAO.read();
+    for (Funcionarios funcionario : funcionarios) {
+        model.addRow(new Object[]{funcionario.getNomeFuncionario(), funcionario.getEmail(), funcionario.getCpf()});
+    }
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -47,7 +101,7 @@ public class GerenciarFuncionarios extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTCadastro = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        botaooadicionarFuncionarios = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jComboBox2 = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -78,19 +132,26 @@ public class GerenciarFuncionarios extends javax.swing.JInternalFrame {
 
         jButton1.setText("Remover Funcionário");
 
-        jButton2.setText("Adicionar Funcionário");
+        botaooadicionarFuncionarios.setText("Adicionar Funcionário");
+        botaooadicionarFuncionarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaooadicionarFuncionariosActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Salvar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jComboBox2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione o Cargo", "Repositor", "Financeiro", "Gerente", "Administrador", " " }));
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Nome do Funcionario", "Email", "Cargo"
@@ -116,7 +177,7 @@ public class GerenciarFuncionarios extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(botaooadicionarFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 716, Short.MAX_VALUE)
                     .addComponent(jScrollPane2)
                     .addGroup(layout.createSequentialGroup()
@@ -133,7 +194,7 @@ public class GerenciarFuncionarios extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(botaooadicionarFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(39, 39, 39)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -146,10 +207,35 @@ public class GerenciarFuncionarios extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void botaooadicionarFuncionariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaooadicionarFuncionariosActionPerformed
+
+            
+        int selectedRow = jTCadastro.getSelectedRow();
+    if (selectedRow != -1) {
+        // Obter os dados do funcionário selecionado
+        String nome = (String) jTCadastro.getValueAt(selectedRow, 0);
+        String email = (String) jTCadastro.getValueAt(selectedRow, 1);
+        String cargo = (String) jComboBox2.getSelectedItem();
+        
+        // Adicionar os dados à tabela jTable2
+        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+        model.addRow(new Object[]{nome, email, cargo});
+    } else {
+        JOptionPane.showMessageDialog(this, "Por favor, selecione um funcionário na tabela de cadastro.");
+    }
+    
+        readJtable(); 
+    }//GEN-LAST:event_botaooadicionarFuncionariosActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+     
+    JOptionPane.showMessageDialog(this, "Funcionário Registrado com SUCESSO!!");
+    }//GEN-LAST:event_jButton3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botaooadicionarFuncionarios;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JScrollPane jScrollPane1;

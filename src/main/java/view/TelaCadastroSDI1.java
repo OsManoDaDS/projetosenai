@@ -7,7 +7,8 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.table.DefaultTableModel;
+import model.bean.Funcionarios;
+import model.dao.FuncionarioDAO;
 
 
 public class TelaCadastroSDI1 extends javax.swing.JFrame {
@@ -196,6 +197,27 @@ public class TelaCadastroSDI1 extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         validateAndSave();
+        
+        Funcionarios p  = new Funcionarios();
+        FuncionarioDAO dao = new FuncionarioDAO();
+        
+        p.setNomeFuncionario(txtNome.getText());
+        p.setSenha(txtSenhaCadastro.getText());
+        p.setEmail(txtEmail.getText());
+        p.setCpf(txtcpf.getText());
+        p.setCargo("Inicial");
+        
+        dao.create(p);
+        
+        txtNome.setText("");
+        txtSenhaCadastro.setText("");
+        txtEmail.setText("");
+        txtCelular.setText("");
+        txtDataNascimento.setText("");
+        txtcpf.setText("");
+      
+        
+    
     }//GEN-LAST:event_jButton1ActionPerformed
 private void validateAndSave() {
     if (txtNome.getText().trim().isEmpty() ||
