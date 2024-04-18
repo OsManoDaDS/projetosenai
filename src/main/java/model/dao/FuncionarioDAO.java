@@ -45,37 +45,36 @@ public class FuncionarioDAO {
     
     }
     
-    public boolean checkLogin(){
-      
-       Connection con = ConnectionFactory.getConnection();
-       PreparedStatement stmt = null;  
-       ResultSet rs = null;
-       boolean check = false;
-       
-       
-        try {
-            stmt = con.prepareStatement("SELECT * FROM funcionarios WHERE email = ? and senha = ?");
-            stmt.setString(1, "email");
-            stmt.setString(2, "senha");
-            
-            rs = stmt.executeQuery();
-            
-            if(rs.next()){
-                
-                check = true;
-             
-            }
-    
-        } catch (SQLException ex) {
-            Logger.getLogger(FuncionarioDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            ConnectionFactory.closeConnection(con, stmt, rs);
-        } 
-       
-        
-        return check; 
-      
+    public boolean checkLogin(String email, String password) {
+
+    Connection con = ConnectionFactory.getConnection();
+    PreparedStatement stmt = null;
+    ResultSet rs = null;
+    boolean check = false;
+
+    try {
+        // Implement secure password hashing (replace with your chosen algorithm)
+        String hashedPassword = hashPassword(password); // Implement this method
+
+        stmt = con.prepareStatement("SELECT * FROM funcionarios WHERE email = ? AND senha = ?");
+        stmt.setString(1, email);
+        stmt.setString(2, hashedPassword);
+
+        rs = stmt.executeQuery();
+
+        if (rs.next()) {
+            check = true; // Login successful if a record is found
+        }
+
+    } catch (SQLException ex) {
+        Logger.getLogger(FuncionarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+    } finally {
+        ConnectionFactory.closeConnection(con, stmt, rs);
     }
+
+    return check;
+}
+
     
     public List<Funcionarios> read(){
       
@@ -155,5 +154,9 @@ public class FuncionarioDAO {
             ConnectionFactory.closeConnection(con, stmt);
         }
     
+    }
+
+    private String hashPassword(String password) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

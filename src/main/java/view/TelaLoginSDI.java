@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import model.dao.FuncionarioDAO;
 
 public class TelaLoginSDI extends javax.swing.JFrame {
 
@@ -34,7 +35,7 @@ public class TelaLoginSDI extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        txtCpfLogin = new javax.swing.JTextField();
+        txtEmailLogin = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         txtSenha = new javax.swing.JPasswordField();
         BotaoLogin = new javax.swing.JButton();
@@ -47,11 +48,11 @@ public class TelaLoginSDI extends javax.swing.JFrame {
         jPanel2.setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel1.setText("CPF");
+        jLabel1.setText("Email");
         jPanel2.add(jLabel1);
         jLabel1.setBounds(40, 190, 50, 16);
-        jPanel2.add(txtCpfLogin);
-        txtCpfLogin.setBounds(40, 210, 280, 30);
+        jPanel2.add(txtEmailLogin);
+        txtEmailLogin.setBounds(40, 210, 280, 30);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("Senha");
@@ -126,30 +127,31 @@ public class TelaLoginSDI extends javax.swing.JFrame {
 
     }//GEN-LAST:event_txtSenhaActionPerformed
 
-    public boolean checklogin(String login, String senha){
-        return login.equals("usuario") && senha.equals("123");
+    public boolean checklogin(String email, String senha){
+        return email.equals("admin@senai") && senha.equals("123");
     }
+
     
     private void BotaoLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoLoginActionPerformed
-    
+
         try {
                 
-            if (txtCpfLogin == null || txtSenha == null) {
-            throw new NullPointerException("txtUsuario ou txtSenha vazios");
+            if (txtEmailLogin == null || txtSenha == null) {
+            throw new NullPointerException("txtEmailLogin ou txtSenha vazios");
             }
 
-            if (this.checklogin(txtCpfLogin.getText(), new String (txtSenha.getPassword()))) {
+            if (checklogin(txtEmailLogin.getText(), new String (txtSenha.getPassword()))) {
             JOptionPane.showMessageDialog(null, "SEJA BEM VINDO!");
             new TelaPrincipalMDI().setVisible(true);
             this.dispose();
             }
             else {
-            JOptionPane.showMessageDialog(null, "Usuário ou senha incorretos!");
+            JOptionPane.showMessageDialog(null, "Email ou senha incorretos!");
             }
         }
         
         catch (NullPointerException e) {
-            JOptionPane.showMessageDialog(null, "Usuário ou senha vazio" + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Email ou senha vazio" + e.getMessage());
         }
          
     }//GEN-LAST:event_BotaoLoginActionPerformed
@@ -186,7 +188,7 @@ public class TelaLoginSDI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField txtCpfLogin;
+    private javax.swing.JTextField txtEmailLogin;
     private javax.swing.JPasswordField txtSenha;
     // End of variables declaration//GEN-END:variables
 }

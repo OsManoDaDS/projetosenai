@@ -5,6 +5,12 @@
 package view;
 
 import com.formdev.flatlaf.FlatDarculaLaf;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,6 +19,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import model.bean.Funcionarios;
 import model.dao.FuncionarioDAO;
 
@@ -27,9 +34,20 @@ public class GerenciarFuncionarios extends javax.swing.JInternalFrame {
      */
     public GerenciarFuncionarios() {
         initComponents();
-        
+       
         readJtable();
-        readJtableCargo();
+        
+        try (FileInputStream fis = new FileInputStream("employees.dat");
+         ObjectInputStream ois = new ObjectInputStream(fis)) {
+        List<List<String>> employeeData = (List<List<String>>) ois.readObject();
+        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+        for (List<String> row : employeeData) {
+            model.addRow(row.toArray());
+        }
+    } catch (IOException | ClassNotFoundException e) {
+        // Handle exceptions (e.g., file not found)
+    }
+//        readJtableCargo();
         
         SwingUtilities.invokeLater(() -> {
         
@@ -218,53 +236,61 @@ public class GerenciarFuncionarios extends javax.swing.JInternalFrame {
         int selectedRow = jTCadastro.getSelectedRow();
         
         if (selectedRow != -1) {
-            // Obter os dados do funcionário selecionado
             String nome = (String) jTCadastro.getValueAt(selectedRow, 0);
             String email = (String) jTCadastro.getValueAt(selectedRow, 1);
             String cargo = (String) jComboBox2.getSelectedItem();
         
-            // DELETAR NA PRIMEIRA TABELA (NÃO TESTADO)
-            Funcionarios p  = new Funcionarios();
-            FuncionarioDAO dao = new FuncionarioDAO();
-        
-            dao.delete(p);
-        
-            // Adicionar os dados à tabela jTable2
             DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
             model.addRow(new Object[]{nome, email, cargo});
-        
+            DefaultTableModel model1 = (DefaultTableModel) jTCadastro.getModel();
+            model1.setRowCount(0); 
+            
+        DefaultTableModel model2 = (DefaultTableModel) jTCadastro.getModel();
+        model1.removeRow(selectedRow); // Clear all rows
         
         } else {
             JOptionPane.showMessageDialog(this, "Por favor, selecione um funcionário na tabela de cadastro.");
         }
     
         readJtable();
-        readJtableCargo();
+//        readJtableCargo();
     }//GEN-LAST:event_botaooadicionarFuncionariosActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
      
+        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+    List<List<String>> employeeData = new ArrayList<>();
+    for (int i = 0; i < model.getRowCount(); i++) {
+        List<String> rowData = new ArrayList<>();
+        for (int j = 0; j < model.getColumnCount(); j++) {
+            rowData.add((String) model.getValueAt(i, j));
+        }
+        employeeData.add(rowData);
+    }
+
+    // Save data to a file (replace with your database logic)
+    try (FileOutputStream fos = new FileOutputStream("employees.dat");
+         ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+        oos.writeObject(employeeData);
+        oos.flush();
         JOptionPane.showMessageDialog(this, "Funcionário Registrado com SUCESSO!!");
-        dispose();
+    } catch (IOException e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Erro ao salvar dados!");
+    }
         
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     
-        // BOTÃO REMOVER FUNC NA SEGUNDA TABELA (NÃO TESTADO)
-        if (jTable2.getSelectedRow() != -1){
-            
-            Funcionarios p  = new Funcionarios();
-            FuncionarioDAO dao = new FuncionarioDAO();
-        
-            dao.delete(p);
-        
-            readJtable();
-            readJtableCargo();
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "Funcionário não selecionado");
-        }
+    int selectedRow = jTable2.getSelectedRow();
+
+    if (selectedRow != -1) {
+        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+        model.removeRow(selectedRow);
+    } else {
+        JOptionPane.showMessageDialog(this, "Selecione um funcionário para remover.");
+    }
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
