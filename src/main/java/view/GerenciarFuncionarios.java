@@ -29,6 +29,7 @@ public class GerenciarFuncionarios extends javax.swing.JInternalFrame {
         initComponents();
         
         readJtable();
+        readJtableCargo();
         
         SwingUtilities.invokeLater(() -> {
         
@@ -131,6 +132,11 @@ public class GerenciarFuncionarios extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jTCadastro);
 
         jButton1.setText("Remover Funcionário");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         botaooadicionarFuncionarios.setText("Adicionar Funcionário");
         botaooadicionarFuncionarios.addActionListener(new java.awt.event.ActionListener() {
@@ -208,29 +214,59 @@ public class GerenciarFuncionarios extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaooadicionarFuncionariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaooadicionarFuncionariosActionPerformed
-
             
         int selectedRow = jTCadastro.getSelectedRow();
-    if (selectedRow != -1) {
-        // Obter os dados do funcionário selecionado
-        String nome = (String) jTCadastro.getValueAt(selectedRow, 0);
-        String email = (String) jTCadastro.getValueAt(selectedRow, 1);
-        String cargo = (String) jComboBox2.getSelectedItem();
         
-        // Adicionar os dados à tabela jTable2
-        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
-        model.addRow(new Object[]{nome, email, cargo});
-    } else {
-        JOptionPane.showMessageDialog(this, "Por favor, selecione um funcionário na tabela de cadastro.");
-    }
+        if (selectedRow != -1) {
+            // Obter os dados do funcionário selecionado
+            String nome = (String) jTCadastro.getValueAt(selectedRow, 0);
+            String email = (String) jTCadastro.getValueAt(selectedRow, 1);
+            String cargo = (String) jComboBox2.getSelectedItem();
+        
+            // DELETAR NA PRIMEIRA TABELA (NÃO TESTADO)
+            Funcionarios p  = new Funcionarios();
+            FuncionarioDAO dao = new FuncionarioDAO();
+        
+            dao.delete(p);
+        
+            // Adicionar os dados à tabela jTable2
+            DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+            model.addRow(new Object[]{nome, email, cargo});
+        
+        
+        } else {
+            JOptionPane.showMessageDialog(this, "Por favor, selecione um funcionário na tabela de cadastro.");
+        }
     
-        readJtable(); 
+        readJtable();
+        readJtableCargo();
     }//GEN-LAST:event_botaooadicionarFuncionariosActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
      
-    JOptionPane.showMessageDialog(this, "Funcionário Registrado com SUCESSO!!");
+        JOptionPane.showMessageDialog(this, "Funcionário Registrado com SUCESSO!!");
+        dispose();
+        
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    
+        // BOTÃO REMOVER FUNC NA SEGUNDA TABELA (NÃO TESTADO)
+        if (jTable2.getSelectedRow() != -1){
+            
+            Funcionarios p  = new Funcionarios();
+            FuncionarioDAO dao = new FuncionarioDAO();
+        
+            dao.delete(p);
+        
+            readJtable();
+            readJtableCargo();
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Funcionário não selecionado");
+        }
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
