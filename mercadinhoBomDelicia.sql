@@ -27,10 +27,12 @@ CREATE TABLE if not exists funcionarios (
   -- CONSTRAINT fk_funcionarios_produtos foreign key (produtos_id) references produtos (id)
 );
 
-INSERT INTO produtos (nomeProduto,quantidade,preco)VALUES(?,?,?);
+-- INSERT INTO produtos (nomeProduto,quantidade,preco)VALUES(?,?,?);
 
-SELECT * FROM produtos;
+-- SELECT * FROM produtos;
 
-UPDATE produtos SET nomeProduto = ?,quantidade = ?,preco = ? WHERE id_produto = ?;
+-- UPDATE produtos SET nomeProduto = ?,quantidade = ?,preco = ? WHERE id_produto = ?;
 
-DELETE FROM produtos WHERE id_produto = ?;
+-- DELETE FROM produtos WHERE id_produto = ?;
+
+-- INSERT INTO funcionarios (nomeFuncionario,senha,email,cargo,cpf)VALUES("administrador","senhaadmin","admin@admin","",?);
